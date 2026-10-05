@@ -19,7 +19,7 @@ logging:
       springframework:
         web:
           filter:
-            CommonsRequestLoggingFilter: info
+            CommonsRequestLoggingFilter: debug
     com:
       openclassrooms:
         etudiant: info
