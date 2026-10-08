@@ -1,0 +1,22 @@
+<div class="card m-3">
+  <h5 class="card-header">Student detail</h5>
+  <div class="card-body">
+    @if (errorMessage) {
+      <div class="text-danger">{{ errorMessage }}</div>
+    }
+
+    @if (student) {
+      <p><strong>Id:</strong> {{ student.id }}</p>
+      <p><strong>First Name:</strong> {{ student.firstName }}</p>
+      <p><strong>Last Name:</strong> {{ student.lastName }}</p>
+      <p><strong>Email:</strong> {{ student.email }}</p>
+    }
+
+    <div class="text-center">
+      @if (student) {
+        <a class="btn btn-primary mr-1" [routerLink]="['/students', student.id, 'edit']">Edit</a>
+      }
+      <a class="btn btn-secondary" routerLink="/students">Back to the list</a>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,9 @@ public class StudentService {
     private final StudentDtoMapper studentDtoMapper;
 
     public StudentResponseDTO create(StudentRequestDTO studentRequestDTO) {
+        if (studentRepository.existsByEmail(studentRequestDTO.getEmail())) {
+            throw new IllegalArgumentException("Email already used by another student");
+        }
         Student student = studentDtoMapper.toEntity(studentRequestDTO);
         Student savedStudent = studentRepository.save(student);
         return studentDtoMapper.toDto(savedStudent);
@@ -40,6 +43,9 @@ public class StudentService {
 
     public void update(Long id, StudentRequestDTO studentRequestDTO) {
         Student student = findStudent(id);
+        if (studentRepository.existsByEmailAndIdNot(studentRequestDTO.getEmail(), id)) {
+            throw new IllegalArgumentException("Email already used by another student");
+        }
         studentDtoMapper.updateEntity(studentRequestDTO, student);
         studentRepository.save(student);
     }

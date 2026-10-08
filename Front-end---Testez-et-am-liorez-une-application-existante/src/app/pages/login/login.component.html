@@ -37,16 +37,10 @@
       </div>
 
       @if (loading) {
-        <div class="alert alert-info">Authentication in progress...</div>
+        <div>Authentication in progress...</div>
       }
       @if (errorMessage) {
-        <div class="alert alert-danger">{{ errorMessage }}</div>
-      }
-      @if (token) {
-        <div class="alert alert-success">
-          <div>Authentication successful. Token received:</div>
-          <code class="token">{{ token }}</code>
-        </div>
+        <div class="text-danger">{{ errorMessage }}</div>
       }
 
       <div class="text-center">
