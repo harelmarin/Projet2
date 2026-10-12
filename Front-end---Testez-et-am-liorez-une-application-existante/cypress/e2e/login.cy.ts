@@ -28,7 +28,7 @@ describe('Login page', () => {
   });
 
   it('should display an error when the credentials are wrong', () => {
-    cy.intercept('POST', '/api/login', { statusCode: 400, body: 'Invalid credentials' });
+    cy.intercept('POST', '/api/login', { statusCode: 401, body: { message: 'Invalid credentials' } });
 
     cy.get('input[formControlName="login"]').type('login');
     cy.get('input[formControlName="password"]').type('wrong');
