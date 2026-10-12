@@ -43,4 +43,10 @@ describe('Login page', () => {
 
     cy.url().should('include', '/login');
   });
+
+  it('should go to the register page from the login page', () => {
+    cy.contains('a', 'Register').click();
+
+    cy.url().should('include', '/register');
+  });
 });

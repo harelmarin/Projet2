@@ -75,4 +75,10 @@ describe('LoginComponent', () => {
     expect(component.submitted).toBe(false);
     expect(component.loginForm.value).toEqual({ login: null, password: null });
   });
+
+  it('should display a link to the register page', () => {
+    const link = fixture.nativeElement.querySelector('a[href="/register"]');
+
+    expect(link).not.toBeNull();
+  });
 });
