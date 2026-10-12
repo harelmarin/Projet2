@@ -5,6 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { UserService } from '../../core/service/user.service';
 import { UserMockService } from '../../core/service/user-mock.service';
 import { of } from 'rxjs';
+import { provideRouter, Router } from '@angular/router';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -32,6 +33,7 @@ describe('RegisterComponent', () => {
 
 describe('RegisterComponent actions', () => {
   let component: RegisterComponent;
+  let router: Router;
   const userService = { register: jest.fn() };
   const user = { firstName: 'John', lastName: 'Doe', login: 'login', password: 'password' };
 
@@ -41,11 +43,14 @@ describe('RegisterComponent actions', () => {
     await TestBed.configureTestingModule({
       imports: [RegisterComponent],
       providers: [
+        provideRouter([]),
         { provide: UserService, useValue: userService },
       ]
     })
     .compileComponents();
 
+    router = TestBed.inject(Router);
+    jest.spyOn(router, 'navigate').mockResolvedValue(true);
     const fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -65,6 +70,7 @@ describe('RegisterComponent actions', () => {
 
     expect(userService.register).toHaveBeenCalledWith(user);
     expect(window.alert).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalledWith(['/login']);
   });
 
   it('should reset the form', () => {
