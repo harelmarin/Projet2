@@ -16,6 +16,7 @@ describe('RegisterComponent', () => {
       imports: [RegisterComponent],
       providers: [
         provideHttpClient(),
+        provideRouter([]),
         { provide: UserService, useValue: UserMockService },
       ]
     })
@@ -28,6 +29,12 @@ describe('RegisterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display a link to the login page', () => {
+    const link = fixture.nativeElement.querySelector('a[href="/login"]');
+
+    expect(link).not.toBeNull();
   });
 });
 

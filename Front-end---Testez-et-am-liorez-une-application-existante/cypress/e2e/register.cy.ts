@@ -35,4 +35,10 @@ describe('Register page', () => {
     });
     cy.wrap(alertStub).should('have.been.calledWith', 'SUCCESS!! :-)');
   });
+
+  it('should go to the login page from the register page', () => {
+    cy.contains('a', 'Login').click();
+
+    cy.url().should('include', '/login');
+  });
 });
