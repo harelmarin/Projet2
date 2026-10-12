@@ -81,4 +81,11 @@ describe('LoginComponent', () => {
 
     expect(link).not.toBeNull();
   });
+
+  it('should display a success message after the registration', () => {
+    component.registered = true;
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.text-success').textContent).toContain('Account created');
+  });
 });

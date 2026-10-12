@@ -36,6 +36,9 @@
         }
       </div>
 
+      @if (registered) {
+        <div class="text-success">Account created, you can now login.</div>
+      }
       @if (loading) {
         <div>Authentication in progress...</div>
       }

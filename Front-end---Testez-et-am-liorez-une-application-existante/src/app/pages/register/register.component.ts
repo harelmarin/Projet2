@@ -56,8 +56,7 @@ export class RegisterComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
-          alert('SUCCESS!! :-)');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login'], { queryParams: { registered: true } });
         },
         error: (error: HttpErrorResponse) => this.errorMessage = getErrorMessage(error)
       });

@@ -18,8 +18,6 @@ describe('Register page', () => {
 
   it('should register a user', () => {
     cy.intercept('POST', '/api/register', { statusCode: 201 }).as('register');
-    const alertStub = cy.stub();
-    cy.on('window:alert', alertStub);
 
     cy.get('input[formControlName="firstName"]').type('John');
     cy.get('input[formControlName="lastName"]').type('Doe');
@@ -33,7 +31,8 @@ describe('Register page', () => {
       login: 'login',
       password: 'password',
     });
-    cy.wrap(alertStub).should('have.been.calledWith', 'SUCCESS!! :-)');
+    cy.url().should('include', '/login');
+    cy.contains('Account created').should('be.visible');
   });
 
   it('should display an error when the login already exists', () => {

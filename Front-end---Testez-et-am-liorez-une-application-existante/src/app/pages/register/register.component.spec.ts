@@ -47,7 +47,6 @@ describe('RegisterComponent actions', () => {
 
   beforeEach(async () => {
     userService.register.mockReset();
-    jest.spyOn(window, 'alert').mockImplementation(() => undefined);
     await TestBed.configureTestingModule({
       imports: [RegisterComponent],
       providers: [
@@ -77,8 +76,7 @@ describe('RegisterComponent actions', () => {
     component.onSubmit();
 
     expect(userService.register).toHaveBeenCalledWith(user);
-    expect(window.alert).toHaveBeenCalled();
-    expect(router.navigate).toHaveBeenCalledWith(['/login']);
+    expect(router.navigate).toHaveBeenCalledWith(['/login'], { queryParams: { registered: true } });
   });
 
   it('should display the error when the registration fails', () => {

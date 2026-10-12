@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -22,12 +22,14 @@ export class LoginComponent implements OnInit {
   private userService = inject(UserService);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
   loginForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
   loading: boolean = false;
   errorMessage: string = '';
+  registered: boolean = this.route.snapshot.queryParamMap.get('registered') === 'true';
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group(
