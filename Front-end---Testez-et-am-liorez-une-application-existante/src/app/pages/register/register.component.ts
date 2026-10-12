@@ -5,7 +5,9 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../shared/material.module';
 import { UserService } from '../../core/service/user.service';
 import { Register } from '../../core/models/Register';
+import { HttpErrorResponse } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { getErrorMessage } from '../../core/utils/error-message';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +23,7 @@ export class RegisterComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   registerForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
+  errorMessage: string = '';
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group(
@@ -39,6 +42,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
+    this.errorMessage = '';
     if (this.registerForm.invalid) {
       return;
     }
@@ -50,16 +54,18 @@ export class RegisterComponent implements OnInit {
     };
     this.userService.register(registerUser)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-      () => {
-        alert('SUCCESS!! :-)');
-        this.router.navigate(['/login']);
-      },
-    );
+      .subscribe({
+        next: () => {
+          alert('SUCCESS!! :-)');
+          this.router.navigate(['/login']);
+        },
+        error: (error: HttpErrorResponse) => this.errorMessage = getErrorMessage(error)
+      });
   }
 
   onReset(): void {
     this.submitted = false;
+    this.errorMessage = '';
     this.registerForm.reset();
   }
 }

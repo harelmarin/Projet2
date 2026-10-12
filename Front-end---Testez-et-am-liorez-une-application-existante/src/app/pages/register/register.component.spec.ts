@@ -4,7 +4,8 @@ import { RegisterComponent } from './register.component';
 import { provideHttpClient } from '@angular/common/http';
 import { UserService } from '../../core/service/user.service';
 import { UserMockService } from '../../core/service/user-mock.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { provideRouter, Router } from '@angular/router';
 
 describe('RegisterComponent', () => {
@@ -78,6 +79,16 @@ describe('RegisterComponent actions', () => {
     expect(userService.register).toHaveBeenCalledWith(user);
     expect(window.alert).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalledWith(['/login']);
+  });
+
+  it('should display the error when the registration fails', () => {
+    userService.register.mockReturnValue(throwError(() => new HttpErrorResponse({ status: 400, error: { message: 'User with login login already exists' } })));
+    component.registerForm.setValue(user);
+
+    component.onSubmit();
+
+    expect(component.errorMessage).toBe('User with login login already exists');
+    expect(router.navigate).not.toHaveBeenCalled();
   });
 
   it('should reset the form', () => {

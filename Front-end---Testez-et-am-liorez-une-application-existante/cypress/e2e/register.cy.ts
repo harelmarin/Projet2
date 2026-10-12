@@ -36,6 +36,18 @@ describe('Register page', () => {
     cy.wrap(alertStub).should('have.been.calledWith', 'SUCCESS!! :-)');
   });
 
+  it('should display an error when the login already exists', () => {
+    cy.intercept('POST', '/api/register', { statusCode: 400, body: { message: 'User with login login already exists' } });
+
+    cy.get('input[formControlName="firstName"]').type('John');
+    cy.get('input[formControlName="lastName"]').type('Doe');
+    cy.get('input[formControlName="login"]').type('login');
+    cy.get('input[formControlName="password"]').type('password');
+    cy.contains('button', 'Register').click();
+
+    cy.get('.text-danger').should('contain', 'User with login login already exists');
+  });
+
   it('should go to the login page from the register page', () => {
     cy.contains('a', 'Login').click();
 
