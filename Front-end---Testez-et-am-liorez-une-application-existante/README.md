@@ -41,18 +41,22 @@ This will compile your project and store the build artifacts in the `dist/` dire
 To execute unit tests with the [Jest](https://jestjs.io/) test runner, use the following command:
 
 ```bash
-jest
+npm test
 ```
 
 ## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+The end-to-end tests use [Cypress](https://www.cypress.io/). Start the application in a first terminal:
 
 ```bash
-ng e2e
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Then run the tests in a second terminal:
+
+```bash
+npm run e2e
+```
 
 ## Additional Resources
 

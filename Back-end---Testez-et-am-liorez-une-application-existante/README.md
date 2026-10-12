@@ -74,7 +74,6 @@ enticationProvider. If the current configuration is intentional, to turn off thi
 
 Sur Docker-Desktop, vous devriez voir apparaître un container MySQL qui correspond au projet.
 
-![1-docker-desktop](pictures/1-docker-desktop.png)
 
 Vous pouvez vous connecter à la base de données et vérifier que la table ```user``` a été créée automatiquement.
 Pour cela, cliquez sur le lien `mysql-1` ce qui vous amènera sur la vue complète de la base de données. 
@@ -101,10 +100,6 @@ Dans l'onglet ```Exec```, il faut :
     ```
     Le résultat devrait être : `Empty set (0.00 sec)`
 
-La capture d'écran ci-dessous résume les étapes précédentes : 
-
-![2-docker-desktop-bdd](pictures/2-docker-desktop-bdd.png)
-
 
 ## Exécution des tests
 Pour exécuter les tests Junit, il faut :
@@ -118,14 +113,17 @@ mvn clean test
 ## Fonctionnalités portées
 
     - API de création d'un utilisateur (agent de la bibliothèque)
-    - API d'authentification d'un utilisateur (à faire)
-    - APIs CRUD des étudiants de la bibliothèque (à faire)
+    - API d'authentification d'un utilisateur (JWT)
+    - APIs CRUD des étudiants de la bibliothèque
 
 
 ## Écrans ou blocs concernés
-    - Ecran xxx
-    - Ecran xxx
-    - Ecran xxx
+    - Inscription
+    - Connexion
+    - Liste des étudiants
+    - Détail d'un étudiant
+    - Ajout d'un étudiant
+    - Modification d'un étudiant
 
 
 
