@@ -6,12 +6,12 @@ import {StudentDetailComponent} from './pages/student-detail/student-detail.comp
 import {StudentAddComponent} from './pages/student-add/student-add.component';
 import {StudentEditComponent} from './pages/student-edit/student-edit.component';
 import {authGuard} from './core/guard/auth.guard';
-import {AppComponent} from './app.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'register',
@@ -40,6 +40,9 @@ export const routes: Routes = [
     path: 'students/:id',
     component: StudentDetailComponent,
     canActivate: [authGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'login'
   }
-
 ];

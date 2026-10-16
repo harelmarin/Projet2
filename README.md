@@ -57,13 +57,21 @@ npm start
 - L'application est disponible sur **http://localhost:4200**.
 - Les appels vers `/api` sont renvoyés au back (port 8080) par `proxy.conf.json`.
 
+### 3. Exécuter les tests
+
+Commandes, prérequis (Docker, `.env`, `npm start` pour Cypress) et rapports de couverture : voir la section [Tests](#tests).
+
 ### Récapitulatif
 
-| Service | Adresse | Commande |
-|---|---|---|
-| Front Angular | http://localhost:4200 | `npm start` |
-| API Spring Boot | http://localhost:8080 | `./mvnw spring-boot:run` |
-| MySQL (Docker) | port aléatoire, voir Docker Desktop | démarré par le back |
+| Action | Dossier | Commande | Adresse ou rapport |
+|---|---|---|---|
+| Lancer le back-end (API + MySQL) | `Back-end---...` | `./mvnw spring-boot:run` | http://localhost:8080 |
+| Lancer le front-end (Angular) | `Front-end---...` | `npm start` | http://localhost:4200 |
+| Tests back-end + JaCoCo | `Back-end---...` | `./mvnw clean test` | `target/site/jacoco/index.html` |
+| Tests front-end (Jest) | `Front-end---...` | `npm test` | `coverage/index.html` |
+| Tests E2E (Cypress), `npm start` lancé | `Front-end---...` | `npm run e2e` | résultat dans le terminal |
+
+MySQL (Docker) est démarré par le back, sur un port aléatoire visible dans Docker Desktop.
 
 ## Parcours des écrans
 

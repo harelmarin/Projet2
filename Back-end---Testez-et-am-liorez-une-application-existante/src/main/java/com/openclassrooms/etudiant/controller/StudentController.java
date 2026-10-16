@@ -36,18 +36,18 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentResponseDTO> get(@PathVariable Long id) {
+    public ResponseEntity<StudentResponseDTO> get(@PathVariable("id") Long id) {
         return ResponseEntity.ok(studentService.get(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody StudentRequestDTO studentRequestDTO) {
+    public ResponseEntity<Void> update(@PathVariable("id") Long id, @Valid @RequestBody StudentRequestDTO studentRequestDTO) {
         studentService.update(id, studentRequestDTO);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         studentService.delete(id);
         return ResponseEntity.noContent().build();
     }
