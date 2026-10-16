@@ -70,6 +70,7 @@ Commandes, prérequis (Docker, `.env`, `npm start` pour Cypress) et rapports de 
 | Tests back-end + JaCoCo | `Back-end---...` | `./mvnw clean test` | `target/site/jacoco/index.html` |
 | Tests front-end (Jest) | `Front-end---...` | `npm test` | `coverage/index.html` |
 | Tests E2E (Cypress), `npm start` lancé | `Front-end---...` | `npm run e2e` | résultat dans le terminal |
+| Tests E2E + couverture (port 4200 libre) | `Front-end---...` | `npm run e2e:coverage` | `coverage-e2e/index.html` |
 
 MySQL (Docker) est démarré par le back, sur un port aléatoire visible dans Docker Desktop.
 
@@ -195,6 +196,7 @@ Projet2/
     ├── jest.config.js                   tests unitaires
     ├── cypress.config.ts                tests E2E
     ├── cypress/e2e/                     register.cy.ts, login.cy.ts, students.cy.ts
+    ├── .nycrc.json                      couverture E2E (rapport coverage-e2e/)
     └── src/app/
         ├── app.routes.ts                routes et guard
         ├── app.config.ts                HttpClient et interceptor
@@ -351,7 +353,7 @@ L'ordre compte : `students/new` est déclaré avant `students/:id`, sinon « new
 | Unitaire back | JUnit, Mockito | 16 | services, mapper, `CustomUserDetailService` |
 | Intégration back | MockMvc, Testcontainers | 10 | controllers jusqu'à une vraie base MySQL |
 | Unitaire et composants front | Jest | 56 | services, guard, interceptor, composants |
-| E2E | Cypress | 21 | les 6 écrans, API simulée |
+| E2E | Cypress | 21 | les 6 écrans, API simulée, couverture 89 % |
 
 ### Back-end
 
@@ -391,6 +393,18 @@ npm run e2e
 ```
 
 Pour voir les tests s'exécuter dans le navigateur : `npx cypress open`.
+
+#### Couverture E2E
+
+```bash
+cd Front-end---Testez-et-am-liorez-une-application-existante
+npm run e2e:coverage
+```
+
+Cette commande compile l'application, l'instrumente avec `nyc`, la sert sur le port 4200 et lance Cypress : arrêtez `npm start` avant, le port doit être libre.
+
+- Rapport : `coverage-e2e/index.html`
+- Couverture actuelle : **89 %** (seuil visé : 80 %)
 
 ## Dépannage
 

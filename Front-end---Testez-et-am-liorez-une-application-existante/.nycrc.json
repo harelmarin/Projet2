@@ -1,0 +1,7 @@
+{
+  "include": ["src/app/**/*.ts"],
+  "exclude": ["src/app/**/*.spec.ts"],
+  "excludeAfterRemap": true,
+  "reporter": ["html", "text-summary", "text"],
+  "report-dir": "coverage-e2e"
+}
